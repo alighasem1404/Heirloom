@@ -1,0 +1,44 @@
+{
+  "Riding": [
+    {
+      "name": "Basic Riding",
+      "description": "Can ride any horses and other basic mounts."
+    },
+    {
+      "name": "Improved Control",
+      "description": "Mounts move 10% faster and are easier to control."
+    },
+    {
+      "name": "Sturdy Mount",
+      "description": "Mounts gain 20% more health and are harder to knock off."
+    },
+    {
+      "name": "Swift Gallop",
+      "description": "Mounts can sprint for short durations, increasing speed by 30%."
+    },
+    {
+      "name": "Combat Riding",
+      "description": "Can use melee weapons while riding without penalty."
+    },
+    {
+      "name": "Mounted Archery",
+      "description": "Can use ranged weapons while riding without penalty."
+    },
+    {
+      "name": "Loyal Companion",
+      "description": "Mounts will not flee in combat and gain a 15% damage resistance."
+    },
+    {
+      "name": "Charge Attack",
+      "description": "Can perform a mounted charge attack, dealing extra damage to enemies."
+    },
+    {
+      "name": "Elite Mount",
+      "description": "Unlocks access to rare and powerful mounts (e.g., warhorses, magical beasts)."
+    },
+    {
+      "name": "Master Rider",
+      "description": "Mounts gain 50% more speed, health, and damage resistance."
+    }
+  ]
+}
