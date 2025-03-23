@@ -1,0 +1,35 @@
+[
+    {
+        "id": "meat",
+        "name": "Meat",
+        "type": "food",
+        "providingResource": "food",
+        "description": "A source of food for villagers.",
+        "image": "Image/items/meat.png",
+        "magical": false,
+        "cursed": false,
+        "durability": 100
+    },
+    {
+        "id": "water_barrel",
+        "name": "Water Barrel",
+        "type": "water",
+        "providingResource": "water",
+        "description": "Holds clean drinking water.",
+        "image": "Image/items/water_barrel.png",
+        "magical": false,
+        "cursed": false,
+        "durability": 100
+    },
+    {
+        "id": "wooden_plank",
+        "name": "Wooden Plank",
+        "type": "material",
+        "providingResource": null,
+        "description": "Used for construction.",
+        "image": "Image/items/wooden_plank.png",
+        "magical": false,
+        "cursed": false,
+        "durability": 50
+    }
+]

@@ -1,5 +1,5 @@
-// Time System Module
-const timeSystem = (() => {
+// timeSystem.js
+export const timeSystem = (() => {
     // Time object to track days, weeks, months, seasons, and phases
     const time = {
         day: 1,
@@ -37,29 +37,29 @@ const timeSystem = (() => {
         // If it's night, increment the day and check for week/month/season changes
         if (time.phase === "Morning") {
             time.day++; // Increment day
-          
+        
             // Check if day exceeds 7
             if (time.day > 7) {
                 time.day = 1; // Reset day
                 time.week++; // Increment week
             }
-          
+        
             // Check if week exceeds weeks per month
             if (time.week > timeSettings.weeksPerMonth) {
                 time.week = 1; // Reset week
                 time.month++; // Increment month
-            }
-          
-            // Check if month exceeds months per year
-            if (time.month > timeSettings.monthsPerYear) {
-                time.month = 1; // Reset month
-                time.year++; // Increment year
-            }
-          
-            // Check if season needs to change (optional, if seasons are still relevant)
-            if (time.month > timeSettings.monthsPerSeason) {
-                time.season = getNextSeason(time.season); // Update season
-                updateSessionVisuals(); // Update visuals
+        
+                // Check if month exceeds months per year
+                if (time.month > timeSettings.monthsPerYear) {
+                    time.month = 1; // Reset month
+                    time.year++; // Increment year
+                }
+        
+                // Check if season needs to change (only when the month changes)
+                if ((time.month - 1) % timeSettings.monthsPerSeason === 0) {
+                    time.season = getNextSeason(time.season); // Update season
+                    updateSessionVisuals(); // Update visuals
+                }
             }
         }
 
@@ -146,14 +146,3 @@ const timeSystem = (() => {
         getCurrentTime: () => time
     };
 })();
-
-// Wait for the DOM to be fully loaded before initializing visuals
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded."); // Debugging
-});
-
-// Event listener for the "Next Phase" button
-document.getElementById("nextPhaseButton").addEventListener("click", () => {
-    console.log("Next Phase button clicked."); // Debugging
-    timeSystem.advanceTime();
-});
