@@ -1,6 +1,4 @@
 // resourceSystem.js
-import { inventorySystem } from './inventorySystem.js';
-
 export const resourceSystem = (() => {
     // Essential resources
     const resources = {
@@ -9,7 +7,7 @@ export const resourceSystem = (() => {
         magicPoints: 0 // Essential resource
     };
 
-    // Hybrid resources (calculated based on village inventory)
+    // Hybrid resources
     const hybridResources = {
         food: 0, // Derived from items like meat
         water: 0, // Derived from items like water barrels
@@ -39,34 +37,15 @@ export const resourceSystem = (() => {
     }
 
     // 2. Calculate Hybrid Resources
-    function calculateHybridResources() {
-        hybridResources.food = inventorySystem.getItemQuantity("village", "meat");
-        hybridResources.water = inventorySystem.getItemQuantity("village", "water_barrel");
-        hybridResources.clothing = 0; // Example: Add logic for clothing
+    function calculateHybridResources(food, water, clothing) {
+        hybridResources.food = food;
+        hybridResources.water = water;
+        hybridResources.clothing = clothing;
         console.log("Hybrid resources updated:", hybridResources);
         updateUI(); // Refresh the UI to reflect changes
     }
 
-    // 3. Trade Function
-    function trade(itemId, amount, price) {
-        // Remove the item from the village inventory
-        inventorySystem.changeItemQuantity("village", itemId, -amount);
-
-        // Add gold to essential resources
-        essentialResourceChange("gold", price, "add");
-    }
-
-    // 4. Consume Resources
-    function consumeResources() {
-        // Example: Consume food and water daily
-        inventorySystem.changeItemQuantity("village", "meat", -2); // Consume 2 meat
-        inventorySystem.changeItemQuantity("village", "water_barrel", -1); // Consume 1 water barrel
-
-        // Recalculate hybrid resources
-        calculateHybridResources();
-    }
-
-    // 5. Update UI
+    // 3. Update UI
     function updateUI() {
         console.log("--- Essential Resources ---");
         console.log("Gold:", resources.gold);
@@ -79,15 +58,10 @@ export const resourceSystem = (() => {
         console.log("Clothing:", hybridResources.clothing);
     }
 
-    // Initialize hybrid resources
-    calculateHybridResources();
-
     // Public API
     return {
         essentialResourceChange,
         calculateHybridResources,
-        trade,
-        consumeResources,
         updateUI,
         getResources: () => resources,
         getHybridResources: () => hybridResources
