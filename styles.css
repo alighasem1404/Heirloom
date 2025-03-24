@@ -166,9 +166,37 @@ hr{
 }
 
 
-/* Time system*/
-/*.morning { background-color: #87CEEB; }
-.afternoon { background-color: #FFD700; }
-.evening { background-color: #FFA07A; }
-.night { background-color: #2E2E2E; color: white; }
-*/
+/* test */
+
+#game-container {
+    display: flex;
+    height: 100vh;
+}
+
+#left-menu {
+    width: 25%;
+    background: #2c3e50;
+    color: white;
+    transition: width 0.3s;
+}
+
+#left-menu.collapsed {
+    width: 50px;
+}
+
+
+
+.map-slot {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 2px dashed rgba(255,255,255,0.5);
+    cursor: pointer;
+}
+
+.building {
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px;
+    text-align: center;
+}

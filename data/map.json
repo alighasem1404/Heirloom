@@ -1,0 +1,17 @@
+{
+    "id": "village",
+    "slots": {
+        "river_slot_1": {
+            "x": 120,
+            "y": 80,
+            "allowedBuildings": ["fishing_house"],
+            "enterable": true
+        },
+        "field_slot_1": {
+            "x": 300,
+            "y": 200,
+            "allowedBuildings": ["farm", "granary"],
+            "enterable": false
+        }
+    }
+}
