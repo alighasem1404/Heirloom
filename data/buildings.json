@@ -1,0 +1,48 @@
+{
+    "buildings": [
+        {
+            "id": "fishing_house",
+            "name": "Fishing House",
+            "levels": [
+                {
+                    "level": 1,
+                    "constructionCost": { "wood": 10, "stone": 5 },
+                    "productionRate": 5,
+                    "upgradeCondition": { "day": 5 }
+                },
+                {
+                    "level": 2,
+                    "constructionCost": { "wood": 20, "stone": 10 },
+                    "productionRate": 10,
+                    "upgradeCondition": { "day": 10 }
+                }
+                ,
+                {
+                    "level": 3,
+                    "constructionCost": { "wood": 40, "stone": 20 },
+                    "productionRate": 15,
+                    "upgradeCondition": { "day": 15 }
+                }
+            ]
+        },
+        {
+            "id": "farm",
+            "name": "Farm",
+            "levels": [
+                {
+                    "level": 1,
+                    "constructionCost": { "wood": 15, "stone": 5 },
+                    "productionRate": 8,
+                    "upgradeCondition": { "day": 7 }
+                },
+                {
+                    "level": 2,
+                    "constructionCost": { "wood": 30, "stone": 10 },
+                    "productionRate": 16,
+                    "upgradeCondition": { "day": 14 }
+                }
+            ]
+           
+        }
+    ]
+}

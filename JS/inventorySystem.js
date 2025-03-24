@@ -115,6 +115,7 @@ export const inventorySystem = (() => {
 
     // Public API
     return {
+        initializeInventories,
         changeItemQuantity,
         degradeItem,
         getInventory: (inventoryType) => inventories[inventoryType],

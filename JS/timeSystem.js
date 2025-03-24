@@ -2,7 +2,7 @@
 export const timeSystem = (() => {
     // Time object to track days, weeks, months, seasons, and phases
     const time = {
-        day: 1,
+        day: "Monday",
         week: 1,
         month: 1,
         year: 1, // Initialize year
@@ -10,15 +10,25 @@ export const timeSystem = (() => {
         phase: "Morning"
     };
 
+    const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    // Function to calculate the overall time passed in days
+    function currentDay() {
+        const dayIndex = weekDays.indexOf(time.day) + 1; // Get the index of the current day (1-based)
+        const daysInCurrentWeek = (time.week - 1) * 7;
+        const totalDays = daysInCurrentWeek + dayIndex;
+        return totalDays;
+    }
+      
     const eventListeners = {
         dayPassed: [],
         seasonChanged: []
     };
     // Time settings (customizable ratios)
     const timeSettings = {
-        weeksPerMonth: 1, // Example: 4 weeks per month
+        dayPerMonth: 15, // Example: 30 days per month
         monthsPerYear: 4, // Example: 12 months per year
-        monthsPerSeason: 1 // Example: 3 months per season (optional)
+        monthsPerSeason: 2 // Example: 3 months per season (optional)
     };
 
     // Phases and seasons arrays
@@ -38,21 +48,23 @@ export const timeSystem = (() => {
         // Move to the next phase
         time.phase = getNextPhase(time.phase);
 
+         // Increase week for counting days
+         if (time.day === "Sunday" && time.phase === "Morning") {
+            time.week++;             // Increment week
+        }
         // If it's night, increment the day and check for week/month/season changes
         if (time.phase === "Morning") {
-            time.day++; // Increment day
+            time.day = weekDays[(weekDays.indexOf(time.day) + 1) % weekDays.length]; // Move to next day
+            
         
-            // Check if day exceeds 7
-            if (time.day > 7) {
-                time.day = 1; // Reset day
-                time.week++; // Increment week
-            }
+           
+           
         
             // Check if week exceeds weeks per month
-            if (time.week > timeSettings.weeksPerMonth) {
-                time.week = 1; // Reset week
+            if (currentDay() % (timeSettings.dayPerMonth+1) === 0) {
                 time.month++; // Increment month
         
+                
                 // Check if month exceeds months per year
                 if (time.month > timeSettings.monthsPerYear) {
                     time.month = 1; // Reset month
@@ -71,7 +83,7 @@ export const timeSystem = (() => {
         // Update visuals and check for events
         updateVisuals();
         checkForEvents();
-        updateSessionTracker();
+       
     }
 
     // Helper function to get the next phase
@@ -103,7 +115,7 @@ export const timeSystem = (() => {
         console.log("Updating visuals..."); // Debugging
         const timeDisplay = document.getElementById("timeDisplay");
         if (timeDisplay) {
-            timeDisplay.innerHTML = `<span class="sessionText">${time.season}</span><br>Day: ${time.day}, Week: ${time.week}, Month: ${time.month} , Year: ${time.year}<br><span class="phaseText">${time.phase}</span><img src="${phaseImages[time.phase]}" alt="${time.phase}">`;
+            timeDisplay.innerHTML = `<span class="sessionText">${time.season},${time.week}</span><br> Month: ${time.month} , Year: ${time.year}<br><span style="font-size:20px">${time.day}</span><br><span class="phaseText">Day: ${currentDay()}, ${time.phase}</span><img src="${phaseImages[time.phase]}" alt="${time.phase}">`;
         } else {
             console.error("timeDisplay element not found!"); // Debugging
         }
@@ -146,16 +158,7 @@ export const timeSystem = (() => {
         // Add any additional functionality here
     });
 
-    // Function to update the session tracker
-    function updateSessionTracker() {
-        console.log("Updating session tracker..."); // Debugging
-        const sessionTracker = document.getElementById("sessionTracker");
-        if (sessionTracker) {
-            sessionTracker.innerText = `Days Survived: ${time.day}`;
-        } else {
-            console.error("sessionTracker element not found!"); // Debugging
-        }
-    }
+    
 
     // Initialize visuals when the module is created
     updateSessionVisuals();
@@ -164,6 +167,7 @@ export const timeSystem = (() => {
     // Public API
     return {
         advanceTime,
+        currentDay,
         on,
         getCurrentTime: () => time
     };

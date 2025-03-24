@@ -3,6 +3,7 @@ import { timeSystem } from './timeSystem.js';
 import { inventorySystem } from './inventorySystem.js';
 import { resourceSystem } from './resourceSystem.js';
 import { consumptionSystem } from './consumptionSystem.js';
+import { BuildingSystem } from './buildingSystem.js';
 
 // Wait for the DOM to be fully loaded before initializing
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // initialize the systems
     resourceSystem.updateUI();
     consumptionSystem.initialize();
+    inventorySystem.initializeInventories();
 
 
     // Event listener for the "Next Phase" button

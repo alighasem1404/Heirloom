@@ -83,6 +83,9 @@ export const consumptionSystem = (() => {
     function setWeeklyConsumption(resourceType, amount) {
         weeklyConsumption[resourceType] = amount;
     }
+
+
+
     // Public API
     return {
         initialize,

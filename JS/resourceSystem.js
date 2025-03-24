@@ -52,6 +52,9 @@ export const resourceSystem = (() => {
         updateUI(); // Refresh the UI to reflect changes
     }
 
+
+
+
     // 3. Update UI
     function updateUI() {
         const goldAmount = document.getElementById("goldAmount");
