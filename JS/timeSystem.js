@@ -10,6 +10,10 @@ export const timeSystem = (() => {
         phase: "Morning"
     };
 
+    const eventListeners = {
+        dayPassed: [],
+        seasonChanged: []
+    };
     // Time settings (customizable ratios)
     const timeSettings = {
         weeksPerMonth: 1, // Example: 4 weeks per month
@@ -58,7 +62,8 @@ export const timeSystem = (() => {
                 // Check if season needs to change (only when the month changes)
                 if ((time.month - 1) % timeSettings.monthsPerSeason === 0) {
                     time.season = getNextSeason(time.season); // Update season
-                    updateSessionVisuals(); // Update visuals
+                    triggerEvent("seasonChanged"); // Trigger "season changed" event
+
                 }
             }
         }
@@ -121,9 +126,25 @@ export const timeSystem = (() => {
 
     // Function to trigger an event
     function triggerEvent(eventType) {
-        console.log(`Event triggered: ${eventType}`);
-        // Add logic to handle the event (e.g., display a message, modify resources)
+        if (eventListeners[eventType]) {
+            eventListeners[eventType].forEach(callback => callback());
+        }
     }
+
+    // Function to add event listeners
+    function on(eventType, callback) {
+        if (eventListeners[eventType]) {
+            eventListeners[eventType].push(callback);
+        } else {
+            console.error("Invalid event type:", eventType);
+        }
+    }
+
+    // Example of what happens when dayPassed is triggered
+    on("dayPassed", () => {
+        console.log("A new day has passed!");
+        // Add any additional functionality here
+    });
 
     // Function to update the session tracker
     function updateSessionTracker() {
@@ -143,6 +164,7 @@ export const timeSystem = (() => {
     // Public API
     return {
         advanceTime,
+        on,
         getCurrentTime: () => time
     };
 })();

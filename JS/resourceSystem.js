@@ -1,17 +1,23 @@
 // resourceSystem.js
+
+// Import the consumptionSystem module
+import { consumptionSystem } from './consumptionSystem.js';
+
 export const resourceSystem = (() => {
     // Essential resources
     const resources = {
-        gold: 0, // Essential resource
-        reputation: 0, // Essential resource
-        magicPoints: 0 // Essential resource
+        gold: 103, // Essential resource
+        reputation: 10, // Essential resource
+        magicPoints: 20, // Essential resource
+        entertainment: 0 // Moved to essential resources
     };
 
     // Hybrid resources
     const hybridResources = {
         food: 0, // Derived from items like meat
         water: 0, // Derived from items like water barrels
-        clothing: 0 // Derived from items like clothes
+        clothing: 0, // Derived from items like clothes
+        weapon: 0 // Derived from items like weapons
     };
 
     // Public Functions
@@ -37,25 +43,82 @@ export const resourceSystem = (() => {
     }
 
     // 2. Calculate Hybrid Resources
-    function calculateHybridResources(food, water, clothing) {
+    function calculateHybridResources(food, water, clothing, weapon) {
         hybridResources.food = food;
         hybridResources.water = water;
         hybridResources.clothing = clothing;
+        hybridResources.weapon = weapon;
         console.log("Hybrid resources updated:", hybridResources);
         updateUI(); // Refresh the UI to reflect changes
     }
 
     // 3. Update UI
     function updateUI() {
-        console.log("--- Essential Resources ---");
-        console.log("Gold:", resources.gold);
-        console.log("Reputation:", resources.reputation);
-        console.log("Magic Points:", resources.magicPoints);
+        const goldAmount = document.getElementById("goldAmount");
+        if (goldAmount) {
+            goldAmount.innerHTML = `Gold: ${resources.gold}`;
+            console.log("UI updated.", goldAmount); // Debugging
+        } else {
+            console.error("goldAmount element not found!"); // Debugging
+        }
 
-        console.log("--- Hybrid Resources ---");
-        console.log("Food:", hybridResources.food);
-        console.log("Water:", hybridResources.water);
-        console.log("Clothing:", hybridResources.clothing);
+        const reputationAmount = document.getElementById("reputationAmount");
+        if (reputationAmount) {
+            reputationAmount.innerHTML = `Reputation: ${resources.reputation}`;
+            console.log("UI updated.", reputationAmount); // Debugging
+        } else {
+            console.error("reputationAmount element not found!"); // Debugging
+        }
+
+        const magicPointsAmount = document.getElementById("magicPointsAmount");
+        if (magicPointsAmount) {
+            magicPointsAmount.innerHTML = `Magic Points: ${resources.magicPoints}`;
+            console.log("UI updated.", magicPointsAmount); // Debugging
+        } else {
+            console.error("magicPointsAmount element not found!"); // Debugging
+        }
+
+        const entertainmentAmount = document.getElementById("entertainmentAmount");
+        if (entertainmentAmount) {
+            entertainmentAmount.innerHTML = `Entertainment: ${resources.entertainment}`;
+            console.log("UI updated.", entertainmentAmount); // Debugging
+        } else {
+            console.error("entertainmentAmount element not found!"); // Debugging
+        }
+
+        const foodAmount = document.getElementById("foodAmount");
+        const foodDailyConsumption = consumptionSystem.getDailyConsumption("food");
+        if (foodAmount) {
+            foodAmount.innerHTML = `Food: ${hybridResources.food} (${foodDailyConsumption})`; 
+            console.log("UI updated.", foodAmount); // Debugging
+        } else {
+            console.error("foodAmount element not found!"); // Debugging
+        }
+
+        const waterAmount = document.getElementById("waterAmount");
+        const waterDailyConsumption = consumptionSystem.getDailyConsumption("water");
+        if (waterAmount) {
+            waterAmount.innerHTML = `Water: ${hybridResources.water} (${waterDailyConsumption})`;
+            console.log("UI updated.", waterAmount); // Debugging
+        } else {
+            console.error("waterAmount element not found!"); // Debugging
+        }
+
+        const clothingAmount = document.getElementById("clothingAmount");
+        if (clothingAmount) {
+            clothingAmount.innerHTML = `Clothing: ${hybridResources.clothing}`;
+            console.log("UI updated.", clothingAmount); // Debugging
+        } else {
+            console.error("clothingAmount element not found!"); // Debugging
+        }
+
+        const weaponAmount = document.getElementById("weaponAmount");
+        if (weaponAmount) {
+            weaponAmount.innerHTML = `Weapon: ${hybridResources.weapon}`;
+            console.log("UI updated.", weaponAmount); // Debugging
+        } else {
+            console.error("weaponAmount element not found!"); // Debugging
+        }
     }
 
     // Public API

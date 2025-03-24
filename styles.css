@@ -17,6 +17,11 @@ body {
     height: 100vh;
 }
 
+hr{
+    width: 100%;
+    border-color: inherit !important;
+    margin: 2%;
+}
 .container {
     display: grid;
     grid-template-columns: 350px 1fr;
@@ -106,7 +111,13 @@ body {
     flex-grow: 1;
 }
 
-
+.hybridResource, .essentialResource{
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-top: 10px;
+}
 
 
 
