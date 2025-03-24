@@ -61,7 +61,7 @@ export const timeSystem = (() => {
            
         
             // Check if week exceeds weeks per month
-            if (currentDay() % (timeSettings.dayPerMonth+1) === 0) {
+            if (currentDay() % (timeSettings.dayPerMonth) === 1) {
                 time.month++; // Increment month
         
                 
